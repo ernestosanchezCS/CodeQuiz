@@ -18,29 +18,83 @@
         </nav>
 
         <main>
-            <section>
+            <section id="card1">
+                <div class="card">
+                    <h2>
+                        Try to answer the following code-related questions
+                        within the time limit. Keep in mind that incorrect
+                        answers will penalize your score time by ten seconds!
+                        <br /><br />
+                        Click Start Quiz to begin!
+                    </h2>
+                </div>
+            </section>
+            <section id="card2" hidden="true">
+                <div class="card">
+                    <section id="endCredits">
+                        <p id="endH">All Done!</p>
+                        <p>Your final score is:</p>
+                        <p id="finalScoreTag">22</p>
+                        <form>
+                            <label for="lname">Enter Initials:</label>
+                            <input
+                                type="text"
+                                id="lname"
+                                name="lname"
+                                value=""
+                            />
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </section>
+                </div>
+            </section>
+            <section id="card3" hidden="true">
                 <div class="card">
                     <h2>
                         How long do set localStorage objects persist in memory?
                     </h2>
                     <ul id="choices">
                         <li>
-                            <button class="buttons">24 Hours</button>
+                            <button id="button1" class="buttons">
+                                24 Hours
+                            </button>
                         </li>
                         <li>
-                            <button class="buttons">
+                            <button id="button2" class="buttons">
                                 Until webpage is closed.
                             </button>
                         </li>
                         <li>
-                            <button class="buttons">Forever</button>
+                            <button id="button3" class="buttons">
+                                Forever
+                            </button>
                         </li>
                         <li>
-                            <button class="buttons">Until end of day</button>
+                            <button id="button4" class="buttons">
+                                Until end of day
+                            </button>
                         </li>
                     </ul>
                 </div>
             </section>
+            <section id="card4" hidden="true">
+                <div class="card">
+                    <h2>Highscores</h2>
+                    <ul id="highscoreList">
+                        <li id="highscoreItem">highscore1</li>
+                    </ul>
+                    <div>
+                        <button id="goBack">Go Back</button>
+                        <button id="clearScore">Clear Highscores</button>
+                    </div>
+                </div>
+            </section>
+            <div class="card timer">
+                <div class="timer-text">
+                    <div class="large-font timer-count">20</div>
+                    <h3>seconds remaining</h3>
+                </div>
+            </div>
         </main>
         <script src="assets/js/script.js"></script>
     </body>

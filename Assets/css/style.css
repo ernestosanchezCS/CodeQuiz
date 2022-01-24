@@ -14,7 +14,7 @@ body {
 
 nav {
     align-content: center;
-    margin: 10px;
+    margin: 1px;
 }
 
 button {
@@ -55,9 +55,11 @@ header {
 }
 
 main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: inline-flex;
+}
+
+#container {
+    display: inline;
 }
 
 ul {
@@ -76,6 +78,22 @@ ul {
         rgba(60, 64, 67, 0.15) 0 2px 4px 3px;
     margin: 15px;
     padding: 20px;
+}
+
+#card4 {
+    width: 40%;
+    font-size: large;
+}
+
+#highscoreList {
+    border: black;
+    border-style: solid;
+    background-color: #f2f6f8;
+}
+
+.timer {
+    height: 10%;
+    margin-left: auto;
 }
 
 #top-section {
@@ -101,35 +119,4 @@ ul {
     margin: 8px;
     margin-left: auto;
     text-decoration-line: underline;
-}
-
-@media screen and (max-width: 1183px) {
-    main {
-        flex-direction: column;
-    }
-
-    .word-guess,
-    .results {
-        width: 90vw;
-    }
-
-    section {
-        margin: 20px auto;
-        width: 92vw;
-    }
-}
-
-@media screen and (max-width: 504px) {
-    .large-font {
-        font-size: 2em;
-    }
-
-    .reset-button {
-        font-size: 12px;
-        width: 20ox;
-    }
-
-    .timer {
-        height: 200px;
-    }
 }
