@@ -20,10 +20,11 @@ var highScoresSection = document.getElementById("highscoreList");
 var timerElement = document.querySelector(".timer-count");
 var round = 1;
 var points = 0;
-var timerCount = 20;
+var timerCount = 3;
 
 //we could also take in outside arrays with questions and
 //answer batches to make long or customized Q&As
+//also
 const questions = [
     "How long do set localStorage variables persist in memory?",
     "Before you can save into localStorage what must you do to an object?",
@@ -124,7 +125,7 @@ function startTimer() {
         timerCount--;
         timerElement.textContent = timerCount;
         // Tests if time has run out
-        if (timerCount === 0) {
+        if (timerCount <= 0) {
             // Clears interval
             clearInterval(timer);
             endGame();
@@ -133,19 +134,21 @@ function startTimer() {
 }
 
 function endGame() {
+    document.getElementById("finalScoreTag").textContent = points;
     document.getElementById("card1").hidden = true;
     document.getElementById("card2").hidden = false;
     document.getElementById("card3").hidden = true;
     document.getElementById("card4").hidden = true;
-
+    timerCount = 3;
+    points = 0;
+    timerElement.textContent = timerCount;
     startButton.disabled = false;
     highscoresButton.disabled = false;
 }
 
-function changeCard(){
-    //need to change the textContent to next card question 
+function changeCard() {
+    //need to change the textContent to next card question
     //and answers to choose from
-    
 }
 
 function choiceMade1() {
@@ -162,6 +165,11 @@ function choiceMade1() {
     changeCard();
 }
 function choiceMade2() {
+    if (round == 3) {
+        points += 10;
+    } else {
+        timerCount -= 5;
+    }
     if (round == 4) {
         endGame();
     }
@@ -169,11 +177,21 @@ function choiceMade2() {
 }
 function choiceMade3() {
     if (round == 4) {
+        points += 10;
+    } else {
+        timerCount -= 5;
+    }
+    if (round == 4) {
         endGame();
     }
     round++;
 }
 function choiceMade4() {
+    if (round == 2) {
+        points += 10;
+    } else {
+        timerCount -= 5;
+    }
     if (round == 4) {
         endGame();
     }
