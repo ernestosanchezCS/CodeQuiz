@@ -193,7 +193,8 @@ function choiceMade1() {
     } else {
         timerCount -= 2;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML = "Wrong!";
+        document.getElementById("rightWrong").innerHTML =
+            "Wrong! 2 Second Penalty Applied";
         document.getElementById("rightWrong").hidden = false;
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
@@ -220,7 +221,8 @@ function choiceMade2() {
     } else {
         timerCount -= 2;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML = "Wrong!";
+        document.getElementById("rightWrong").innerHTML =
+            "Wrong! 2 Second Penalty Applied";
         document.getElementById("rightWrong").hidden = false;
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
@@ -237,7 +239,8 @@ function choiceMade3() {
     //so we just display wrong deduct time and change card
     timerCount -= 2;
     //display right for 1.5 seconds points +10
-    document.getElementById("rightWrong").innerHTML = "Wrong!";
+    document.getElementById("rightWrong").innerHTML =
+        "Wrong! 2 Second Penalty Applied";
     document.getElementById("rightWrong").hidden = false;
     setTimeout(function () {
         document.getElementById("rightWrong").hidden = true;
