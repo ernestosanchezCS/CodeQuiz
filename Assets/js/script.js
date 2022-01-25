@@ -20,7 +20,7 @@ var highScoresSection = document.getElementById("highscoreList");
 var timerElement = document.querySelector(".timer-count");
 var round = 1;
 var points = 0;
-var timerCount = 3;
+var timerCount = 10;
 
 //we could also take in outside arrays with questions and
 //answer batches to make long or customized Q&As
@@ -29,7 +29,6 @@ const questions = [
     "How long do set localStorage variables persist in memory?",
     "Before you can save into localStorage what must you do to an object?",
     "What does CSS stand for?",
-    "Where do you link JS files to your HRML document?",
 ];
 //answers will be first button then 4th then 2nd then 3rd
 //for each question respectively
@@ -51,12 +50,13 @@ const batch3 = [
     "Computer Server Service",
     "Cpu Server Software",
 ];
-const batch4 = [
-    "Right before closing html tag",
-    "After CSS link in head",
-    "Right before closing body tag",
-    "Before CSS link in head",
-];
+// const batch4 = [
+//     "Right before closing html tag",
+//     "After CSS link in head",
+//     "Right before closing body tag",
+//     "Before CSS link in head",
+// ];
+//changed to just 3 questions
 
 var highScoresObject = {
     initials: [],
@@ -121,6 +121,13 @@ function startGame() {
 
 function startTimer() {
     // Sets timer
+    document.getElementById("question").innerHTML = questions[0];
+    choice1.innerHTML = batch1[0];
+    choice2.innerHTML = batch1[1];
+    choice3.innerHTML = batch1[2];
+    choice4.innerHTML = batch1[3];
+    timerCount = 10;
+    round = 1;
     timer = setInterval(function () {
         timerCount--;
         timerElement.textContent = timerCount;
@@ -134,13 +141,12 @@ function startTimer() {
 }
 
 function endGame() {
-    document.getElementById("finalScoreTag").textContent = points;
+    clearInterval(timer);
+    document.getElementById("finalScoreTag").innerHTML = points;
     document.getElementById("card1").hidden = true;
     document.getElementById("card2").hidden = false;
     document.getElementById("card3").hidden = true;
     document.getElementById("card4").hidden = true;
-    timerCount = 3;
-    points = 0;
     timerElement.textContent = timerCount;
     startButton.disabled = false;
     highscoresButton.disabled = false;
@@ -149,53 +155,119 @@ function endGame() {
 function changeCard() {
     //need to change the textContent to next card question
     //and answers to choose from
+
+    if (round == 1) {
+        //change to round two
+        //change
+        round++;
+        document.getElementById("question").innerHTML = questions[1];
+        choice1.innerHTML = batch2[0];
+        choice2.innerHTML = batch2[1];
+        choice3.innerHTML = batch2[2];
+        choice4.innerHTML = batch2[3];
+        return;
+    } else if (round == 2) {
+        //change to round 3
+        round++;
+        document.getElementById("question").innerHTML = questions[2];
+        choice1.innerHTML = batch3[0];
+        choice2.innerHTML = batch3[1];
+        choice3.innerHTML = batch3[2];
+        choice4.innerHTML = batch3[3];
+
+        return;
+    } else {
+        //just ented last answer time to end game
+        endGame();
+    }
 }
 
 function choiceMade1() {
     if (round == 1) {
         points += 10;
+        //display right for 1.5 seconds points +10
+        document.getElementById("rightWrong").innerHTML = "Right!";
+        document.getElementById("rightWrong").hidden = false;
+        setTimeout(function () {
+            document.getElementById("rightWrong").hidden = true;
+        }, 1500);
+        //now we swith question
+        changeCard();
     } else {
-        timerCount -= 5;
+        timerCount -= 2;
+        //display right for 1.5 seconds points +10
+        document.getElementById("rightWrong").innerHTML = "Wrong!";
+        document.getElementById("rightWrong").hidden = false;
+        setTimeout(function () {
+            document.getElementById("rightWrong").hidden = true;
+        }, 1500);
+        //now we swith question
+        changeCard();
     }
     //if this was last round end game
     if (round == 4) {
         endGame();
     }
-    round++;
-    changeCard();
 }
 function choiceMade2() {
     if (round == 3) {
         points += 10;
+        //display right for 1.5 seconds points +10
+        document.getElementById("rightWrong").innerHTML = "Right!";
+        document.getElementById("rightWrong").hidden = false;
+        setTimeout(function () {
+            document.getElementById("rightWrong").hidden = true;
+        }, 1500);
+        //now we swith  question
+        changeCard();
     } else {
-        timerCount -= 5;
+        timerCount -= 2;
+        //display right for 1.5 seconds points +10
+        document.getElementById("rightWrong").innerHTML = "Wrong!";
+        document.getElementById("rightWrong").hidden = false;
+        setTimeout(function () {
+            document.getElementById("rightWrong").hidden = true;
+        }, 1500);
+        //now we swith question
+        changeCard();
     }
     if (round == 4) {
         endGame();
     }
-    round++;
 }
 function choiceMade3() {
-    if (round == 4) {
-        points += 10;
-    } else {
-        timerCount -= 5;
-    }
+    //this choice always wrong never the right answer
+    //so we just display wrong deduct time and change card
+    timerCount -= 2;
+    //display right for 1.5 seconds points +10
+    document.getElementById("rightWrong").innerHTML = "Wrong!";
+    document.getElementById("rightWrong").hidden = false;
+    setTimeout(function () {
+        document.getElementById("rightWrong").hidden = true;
+    }, 1500);
+    //now we swith question
+    changeCard();
     if (round == 4) {
         endGame();
     }
-    round++;
 }
 function choiceMade4() {
     if (round == 2) {
         points += 10;
+        //display right for 1.5 seconds points +10
+        document.getElementById("rightWrong").innerHTML = "Right!";
+        document.getElementById("rightWrong").hidden = false;
+        setTimeout(function () {
+            document.getElementById("rightWrong").hidden = true;
+        }, 1500);
+        //now we switch question 2
+        changeCard();
     } else {
         timerCount -= 5;
     }
     if (round == 4) {
         endGame();
     }
-    round++;
 }
 
 startButton.addEventListener("click", startGame);

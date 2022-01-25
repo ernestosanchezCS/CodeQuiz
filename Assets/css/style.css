@@ -66,6 +66,10 @@ ul {
     list-style-type: none;
 }
 
+#rightWrong {
+    font-size: large;
+}
+
 .card {
     background: radial-gradient(
         circle,
