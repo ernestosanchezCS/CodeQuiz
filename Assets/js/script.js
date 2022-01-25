@@ -13,7 +13,7 @@ var timerElement = document.querySelector(".timer-count");
 var submitBtn = document.getElementById("submitBtn");
 var round = 1;
 var points = 0;
-var timerCount = 10;
+var timerCount = 30;
 
 //we could also take in outside arrays with questions and
 //answer batches to make long or customized Q&As
@@ -119,7 +119,7 @@ function startTimer() {
     choice2.innerHTML = batch1[1];
     choice3.innerHTML = batch1[2];
     choice4.innerHTML = batch1[3];
-    timerCount = 11;
+    timerCount = 31;
     round = 1;
     timer = setInterval(function () {
         timerCount--;
@@ -140,7 +140,7 @@ function endGame() {
     document.getElementById("card2").hidden = false;
     document.getElementById("card3").hidden = true;
     document.getElementById("card4").hidden = true;
-    timerElement.textContent = timerCount;
+    timerElement.textContent = 30;
     startButton.disabled = false;
     highscoresButton.disabled = false;
     submitBtn.disabled = false;
@@ -183,22 +183,23 @@ function choiceMade1() {
     if (round == 1) {
         points += 10;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML = "Right!";
         document.getElementById("rightWrong").hidden = false;
+        document.getElementById("rightWrong").innerHTML =
+            "Right! Awarded 10 points!";
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 600);
+        }, 1500);
         //now we swith question
         changeCard();
     } else {
-        timerCount -= 2;
+        timerCount -= 10;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML =
-            "Wrong! 2 Second Penalty Applied";
         document.getElementById("rightWrong").hidden = false;
+        document.getElementById("rightWrong").innerHTML =
+            "Wrong! 10 Second Penalty Applied";
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 600);
+        }, 1500);
         //now we swith question
         changeCard();
     }
@@ -211,22 +212,23 @@ function choiceMade2() {
     if (round == 3) {
         points += 10;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML = "Right!";
         document.getElementById("rightWrong").hidden = false;
+        document.getElementById("rightWrong").innerHTML =
+            "Right! Awarded 10 points!";
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 600);
+        }, 1500);
         //now we swith  question
         changeCard();
     } else {
-        timerCount -= 2;
+        timerCount -= 10;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML =
-            "Wrong! 2 Second Penalty Applied";
         document.getElementById("rightWrong").hidden = false;
+        document.getElementById("rightWrong").innerHTML =
+            "Wrong! 10 Second Penalty Applied";
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 600);
+        }, 1500);
         //now we swith question
         changeCard();
     }
@@ -237,11 +239,11 @@ function choiceMade2() {
 function choiceMade3() {
     //this choice always wrong never the right answer
     //so we just display wrong deduct time and change card
-    timerCount -= 2;
+    timerCount -= 10;
     //display right for 1.5 seconds points +10
-    document.getElementById("rightWrong").innerHTML =
-        "Wrong! 2 Second Penalty Applied";
     document.getElementById("rightWrong").hidden = false;
+    document.getElementById("rightWrong").innerHTML =
+        "Wrong! 10 Second Penalty Applied";
     setTimeout(function () {
         document.getElementById("rightWrong").hidden = true;
     }, 1500);
@@ -255,15 +257,25 @@ function choiceMade4() {
     if (round == 2) {
         points += 10;
         //display right for 1.5 seconds points +10
-        document.getElementById("rightWrong").innerHTML = "Right!";
         document.getElementById("rightWrong").hidden = false;
+        document.getElementById("rightWrong").innerHTML =
+            "Right! Awarded 10 points!";
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
         }, 1500);
         //now we switch question 2
         changeCard();
     } else {
-        timerCount -= 5;
+        timerCount -= 10;
+        //display right for 1.5 seconds points +10
+        document.getElementById("rightWrong").hidden = false;
+        document.getElementById("rightWrong").innerHTML =
+            "Wrong! 10 Second Penalty Applied";
+        setTimeout(function () {
+            document.getElementById("rightWrong").hidden = true;
+        }, 1500);
+        //now we swith question
+        changeCard();
     }
     if (round == 4) {
         endGame();
