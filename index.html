@@ -35,15 +35,14 @@
                         <p id="endH">All Done!</p>
                         <p>Your final score is:</p>
                         <p id="finalScoreTag">22</p>
-                        <form>
+                        <form id="formHS">
                             <label for="lname">Enter Initials:</label>
+                            <input type="text" id="Initials" value="" />
                             <input
-                                type="text"
-                                id="lname"
-                                name="lname"
-                                value=""
+                                id="submitBtn"
+                                type="submit"
+                                value="Submit"
                             />
-                            <input type="submit" value="Submit" />
                         </form>
                     </section>
                 </div>
@@ -81,9 +80,7 @@
             <section id="card4" hidden="true">
                 <div class="card">
                     <h2>Highscores</h2>
-                    <ul id="highscoreList">
-                        <li id="highscoreItem">highscore1</li>
-                    </ul>
+                    <ul id="highscoreList"></ul>
                     <div>
                         <button id="goBack">Go Back</button>
                         <button id="clearScore">Clear Highscores</button>
@@ -92,7 +89,7 @@
             </section>
             <div class="card timer">
                 <div class="timer-text">
-                    <div class="large-font timer-count">20</div>
+                    <div class="large-font timer-count">10</div>
                     <h3>seconds remaining</h3>
                 </div>
             </div>

@@ -1,23 +1,16 @@
-//End credits are hidden enable via id=endCredits
-//when questions done and
-//want to show score and user can enter initials
-
-//disable defaults for submit button
-//we use that to store what is in textbox in
-//localstorage variable
-//add event listener to submit button
-
 var startButton = document.getElementById("start-button");
 var highscoresButton = document.getElementById("highscores");
-// var submitButton = document.getElementById("start-button");
 var goBackButton = document.getElementById("goBack");
+var clearButton = document.getElementById("clearScore");
 var clearScoresButton = document.getElementById("start-button");
 var choice1 = document.getElementById("button1");
 var choice2 = document.getElementById("button2");
 var choice3 = document.getElementById("button3");
 var choice4 = document.getElementById("button4");
-var highScoresSection = document.getElementById("highscoreList");
+var form = document.getElementById("formHS");
+var ul = document.getElementById("highscoreList");
 var timerElement = document.querySelector(".timer-count");
+var submitBtn = document.getElementById("submitBtn");
 var round = 1;
 var points = 0;
 var timerCount = 10;
@@ -50,42 +43,11 @@ const batch3 = [
     "Computer Server Service",
     "Cpu Server Software",
 ];
-// const batch4 = [
-//     "Right before closing html tag",
-//     "After CSS link in head",
-//     "Right before closing body tag",
-//     "Before CSS link in head",
-// ];
-//changed to just 3 questions
 
 var highScoresObject = {
     initials: [],
     scores: [],
 };
-
-//called when page loads
-function init() {
-    //load
-    getHighScores();
-}
-
-// These functions are used by init
-function getHighScores() {
-    // Get stored value from client storage, if it exists
-    var storedScores = localStorage.getItem("highScoresObject");
-    // If stored value doesn't exist, set highScoresObject to 0
-    if (highScoresObject === null) {
-        highScoresObject.initials = [];
-        highScoresObject.scores = [];
-    } else {
-        // If a value is retrieved from client storage set the winCounter to that value
-        // Use JSON.parse() to convert text to JavaScript object
-        let temp = localStorage.getItem("highScoresObject");
-        highScoresObject = JSON.parse(temp);
-        // highScoresObject.initials = temp.initials;
-        // highScoresObject.scores = temp.scores;
-    }
-}
 
 function openHighScores() {
     //make every hidden except for highscores
@@ -98,14 +60,45 @@ function openHighScores() {
     startButton.disabled = true;
     highscoresButton.disabled = true;
 
-    //making for loop to put list of highscores from initial and score arrays
-    // var ul = document.getElementById("highscoreList");
-    // var li = document.createElement("highscoreItem");
-    // var children = ul.children.length + 1;
-    // li.setAttribute("id", "player" + children);
-    // li.appendChild(document.createTextNode("High Score " + children));
-    // ul.appendChild(li);
-    //wi
+    if (!(localStorage.getItem("highscores") == null)) {
+        //we have saved scored
+        var stored = JSON.parse(localStorage.getItem("highscores"));
+        for (i = 0; i < stored.initials.length; i++) {
+            let name = stored.initials[i];
+            let number = stored.scores[i];
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode(name + "  :  " + number));
+            ul.appendChild(li);
+        }
+    }
+}
+
+function addScore(event) {
+    event.preventDefault();
+    submitBtn.disabled = true;
+    console.log(document.getElementById("Initials").value);
+    //stores what user ented as initials into initialsEntered
+    var initialsEntered = document.getElementById("Initials").value;
+    //resets value of text input
+    document.getElementById("Initials").value = "";
+    console.log(localStorage.getItem("highscores"));
+
+    if (localStorage.getItem("highscores") == null) {
+        //no localstorage yet
+        highScoresObject.initials[0] = initialsEntered;
+        highScoresObject.scores[0] = points;
+        console.log(highScoresObject);
+        localStorage.setItem("highscores", JSON.stringify(highScoresObject));
+    } else {
+        //we already have local storage highscores object made
+        //we getitem from local storage and JSON.parse it to get object back
+        //just need to push onto object arrays
+        //then setitem localstorage stringify it back
+        var storedScores = JSON.parse(localStorage.getItem("highscores"));
+        storedScores.initials.push(initialsEntered);
+        storedScores.scores.push(points);
+        localStorage.setItem("highscores", JSON.stringify(storedScores));
+    }
 }
 
 function startGame() {
@@ -126,7 +119,7 @@ function startTimer() {
     choice2.innerHTML = batch1[1];
     choice3.innerHTML = batch1[2];
     choice4.innerHTML = batch1[3];
-    timerCount = 10;
+    timerCount = 11;
     round = 1;
     timer = setInterval(function () {
         timerCount--;
@@ -150,6 +143,7 @@ function endGame() {
     timerElement.textContent = timerCount;
     startButton.disabled = false;
     highscoresButton.disabled = false;
+    submitBtn.disabled = false;
 }
 
 function changeCard() {
@@ -178,7 +172,10 @@ function changeCard() {
         return;
     } else {
         //just ented last answer time to end game
-        endGame();
+        clearInterval(timer);
+        setTimeout(function () {
+            endGame();
+        }, 1500);
     }
 }
 
@@ -190,7 +187,7 @@ function choiceMade1() {
         document.getElementById("rightWrong").hidden = false;
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 1500);
+        }, 600);
         //now we swith question
         changeCard();
     } else {
@@ -200,7 +197,7 @@ function choiceMade1() {
         document.getElementById("rightWrong").hidden = false;
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 1500);
+        }, 600);
         //now we swith question
         changeCard();
     }
@@ -217,7 +214,7 @@ function choiceMade2() {
         document.getElementById("rightWrong").hidden = false;
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 1500);
+        }, 600);
         //now we swith  question
         changeCard();
     } else {
@@ -227,7 +224,7 @@ function choiceMade2() {
         document.getElementById("rightWrong").hidden = false;
         setTimeout(function () {
             document.getElementById("rightWrong").hidden = true;
-        }, 1500);
+        }, 600);
         //now we swith question
         changeCard();
     }
@@ -270,11 +267,15 @@ function choiceMade4() {
     }
 }
 
-startButton.addEventListener("click", startGame);
-
-highscoresButton.addEventListener("click", openHighScores);
-
-goBackButton.addEventListener("click", function () {
+function goBackBtn() {
+    //delete the list items we made in highscore page
+    // const parent = document.getElementById("foo")
+    // while (parent.firstChild) {
+    //     parent.firstChild.remove()
+    // }
+    while (ul.firstChild) {
+        ul.firstChild.remove();
+    }
     document.getElementById("card1").hidden = false;
     document.getElementById("card2").hidden = true;
     document.getElementById("card3").hidden = true;
@@ -282,7 +283,24 @@ goBackButton.addEventListener("click", function () {
 
     startButton.disabled = false;
     highscoresButton.disabled = false;
-});
+}
+
+function clearScores() {
+    localStorage.clear();
+    while (ul.firstChild) {
+        ul.firstChild.remove();
+    }
+}
+
+startButton.addEventListener("click", startGame);
+
+highscoresButton.addEventListener("click", openHighScores);
+
+form.addEventListener("submit", addScore);
+
+goBackButton.addEventListener("click", goBackBtn);
+
+clearButton.addEventListener("click", clearScores);
 
 //no matter if answer is right or wrong goes to next question
 //if it was wrong choice tho it takes time off the clock
@@ -291,6 +309,3 @@ choice1.addEventListener("click", choiceMade1);
 choice2.addEventListener("click", choiceMade2);
 choice3.addEventListener("click", choiceMade3);
 choice4.addEventListener("click", choiceMade4);
-
-// Calls init() so that it fires when page opened
-init();
